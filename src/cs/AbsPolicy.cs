@@ -9,7 +9,7 @@ using System.Web;
 
 namespace WatchGuardParser {
 	
-    public class FirewallPolicy {
+    public class AbsPolicy {
 		public string Name;
 		public string Description;
 		public int Property;
@@ -28,11 +28,12 @@ namespace WatchGuardParser {
         public string PolicyNat;
         
         public string Proxy;
+        
         public bool Nat1To1;
         public bool ApplyDnatGlobal;
         public bool DNatAllTraffic;
-        
         public string DNatSource;
+        
         public string TrafficMgmt;
         public int ConnectionRate;
         public string ConnectionRateAlarm;
@@ -52,5 +53,7 @@ namespace WatchGuardParser {
         public int IdleTimeout;
         public int UseGlobalSticky;
         public int StickyTimer;
+        
+        public List<string. PolicyList;
     }
 }
