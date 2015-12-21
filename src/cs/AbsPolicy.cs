@@ -54,6 +54,6 @@ namespace WatchGuardParser {
         public int UseGlobalSticky;
         public int StickyTimer;
         
-        public List<string. PolicyList;
+        public List<string> PolicyList;
     }
 }
