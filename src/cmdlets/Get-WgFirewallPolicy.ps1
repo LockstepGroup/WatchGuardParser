@@ -18,23 +18,26 @@ function Get-WgFirewallPolicy {
 	$ReturnObject   = @()
 	
 	foreach ($Policy in $ConfigContents.profile.'abs-policy-list'.'abs-policy') {
-		$NewNat                  = New-Object WatchGuardParser.FirewallPolicy
-		$NewNat.Name             = $Nat.Name
-		$NewNat.Description      = $Nat.description
-		$NewNat.Property         = $Nat.Property
-		$NewNat.Type             = $Nat.type
-		$NewNat.Algorithm        = $Nat.algorithm
-		$NewNat.ProxyArp         = $Nat.'proxy-arp'
+		$NewPolicy                  = New-Object WatchGuardParser.FirewallPolicy
+		$NewPolicy.Name             = $Policy.Name
+		$NewPolicy.Description      = $Policy.description
+		$NewPolicy.Property         = $Policy.Property
+		$NewPolicy.Type         = $Policy.type
+		$NewPolicy.TrafficType         = $Policy.'traffic-type'
 		
-		if ($Nat.'nat-item'.member) {
-			$NewNat.AddressType      = @($Nat.'nat-item'.member)[0].'addr-type'
-			$NewNat.Port             = @($Nat.'nat-item'.member)[0].'port'
-			$NewNat.ExternalAddress  = @($Nat.'nat-item'.member)[0].'ext-addr-name'
-			$NewNat.Interface        = @($Nat.'nat-item'.member)[0].'interface'
-			$NewNat.Address          = @($Nat.'nat-item'.member)[0].'addr-name'
+		switch ($Policy.enabled) {
+			true    { $NewPolicy.Enabled = $true }
+			false   { $NewPolicy.Enabled = $false }
+			default { Write-Verbose "Enabled value of $($Policy.enabled) undefined" }
 		}
 		
-		$ReturnObject           += $NewNat
+		$NewPolicy.Firewall = $Policy.firewall
+		$NewPolicy.RejectAction = $Policy.'reject-action'
+		
+		$NewPolicy.FromAliasList = $Policy.'from-alias-list'.alias
+		$NewPolicy.ToAliasList   = $Policy.'to-alias-list'.alias
+		
+		$ReturnObject           += $NewPolicy
 		
 	}
 	
