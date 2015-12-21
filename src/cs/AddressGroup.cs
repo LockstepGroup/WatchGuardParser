@@ -11,7 +11,7 @@ namespace WatchGuardParser {
 	
     public class AddressGroup {
 		public string Name;
-		public List<Address> Members;
+		public List<string> Members;
 		public string Property;
     }
 }
