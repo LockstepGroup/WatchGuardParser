@@ -13,5 +13,6 @@ namespace WatchGuardParser {
 		public string Name;
 		public List<string> Members;
 		public string Property;
+		public string Description;
     }
 }

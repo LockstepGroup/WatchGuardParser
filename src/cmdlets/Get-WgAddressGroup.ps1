@@ -18,10 +18,11 @@ function Get-WgAddressGroup {
 	$ReturnObject   = @()
 	
 	foreach ($Group in $ConfigContents.profile.'address-group-list'.'address-group') {
-		$NewAddressGroup           = New-Object WatchGuardParser.AddressGroup
-		$NewAddressGroup.Name      = $Group.Name
-		$NewAddressGroup.Property  = $Group.Property
-		$ReturnObject             += $NewAddressGroup
+		$NewAddressGroup              = New-Object WatchGuardParser.AddressGroup
+		$NewAddressGroup.Name         = $Group.Name
+		$NewAddressGroup.Property     = $Group.Property
+		$NewAddressGroup.Description  = $Group.description
+		$ReturnObject                += $NewAddressGroup
 		
 		foreach ($Member in $Group.'addr-group-member'.member) {
 			switch ($Member.Type) {
