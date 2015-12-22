@@ -34,7 +34,7 @@ namespace WatchGuardParser {
 		
 		public int Log;
 		public int Enable;
-		public int IdelTimeout;
+		public int IdleTimeout;
 		public int UserFirewall;
 		public int IpsMonitorEnabled;
 		

@@ -25,6 +25,27 @@ function Get-WgPolicy {
 		$NewPolicy.Service      = $Policy.service
 		$NewPolicy.Firewall     = $Policy.firewall
 		$NewPolicy.RejectAction = $Policy.'reject-action'
+			
+		$NewPolicy.FromAliasList = $Policy.'from-alias-list'.alias
+		$NewPolicy.ToAliasList   = $Policy.'to-alias-list'.alias
+			
+		$NewPolicy.Proxy       = $Policy.'proxy'
+		$NewPolicy.TrafficMgmt = $Policy.'traffic-mgmt'
+		
+		$NewPolicy.QosField    = $Policy.'qos-marking'.'marking-field'
+		$NewPolicy.QosMethod   = $Policy.'qos-marking'.'marking-method'.'marking-type'
+		$NewPolicy.QosPriority = $Policy.'qos-marking'.'priority-method'
+		
+		$NewPolicy.Nat                 = $Policy.'nat'
+		$NewPolicy.Schedule            = $Policy.'schedule'
+		$NewPolicy.ConnectionRate      = $Policy.'connection-rate'
+		$NewPolicy.ConnectionRateAlarm = $Policy.'connection-rate-alarm'
+		
+		$NewPolicy.Log               = $Policy.'log'
+		$NewPolicy.Enable            = $Policy.'enable'
+		$NewPolicy.IdleTimeout       = $Policy.'idle-timeout'
+		$NewPolicy.UserFirewall      = $Policy.'user-firewall'
+		$NewPolicy.IpsMonitorEnabled = $Policy.'ips-monitor-enabled'
 		
 		$ReturnObject           += $NewPolicy		
 	}
