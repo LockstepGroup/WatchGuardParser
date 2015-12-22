@@ -46,7 +46,11 @@ function Get-WgPolicy {
 		$NewPolicy.IdleTimeout       = $Policy.'idle-timeout'
 		$NewPolicy.UserFirewall      = $Policy.'user-firewall'
 		$NewPolicy.IpsMonitorEnabled = $Policy.'ips-monitor-enabled'
-		
+			
+		$NewPolicy.Alarm         = $Policy.'alarm'
+		$NewPolicy.SendTcpReset  = $Policy.'send-tcp-reset'
+		$NewPolicy.PolicyRouting = $Policy.'policy-routing'
+			
 		$ReturnObject           += $NewPolicy		
 	}
 	
