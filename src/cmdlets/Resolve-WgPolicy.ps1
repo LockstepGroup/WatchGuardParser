@@ -67,6 +67,14 @@ function Resolve-WgPolicy {
                         }
                     }
                 }
+                Service {
+                    $Lookup = $LookupTable | ? { $_.Name -eq $p.$Field }
+                    foreach ($Member in $Lookup.Members) {
+                        $NewPolicy                  = HelperCloneCustomType $p ServiceResolved
+                        $NewPolicy.ServiceResolved  = $Member
+                        $ReturnObject              += $NewPolicy 
+                    }
+                }
                 default { Throw "$VerbosePrefix Field not handled: $Field" }
             }
 		} else {
