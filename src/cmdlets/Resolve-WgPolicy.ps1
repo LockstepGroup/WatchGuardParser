@@ -40,7 +40,24 @@ function Resolve-WgPolicy {
                         $ReturnObject += $NewPolicy
                     }
                 }
-                default { Throw "VerbosePrefix Field not handled: $Field" }
+                { $_ -match "address" } {
+                    switch ($p.$Field) {
+                        Any { $ReturnObject += HelperCloneCustomType $p }
+                        default {
+                            $Lookup = $LookupTable | ? { $_.Name -eq $p.$Field }
+                            if ($Lookup) {
+                                foreach ($m in $Lookup.Members) {
+                                    $NewPolicy = HelperCloneCustomType $p
+                                    $NewPolicy.$Field = $m
+                                    $ReturnObject += $NewPolicy
+                                }
+                            } else {
+                                Throw "$VerbosePrefix Field Lookup failed: $Field`: $($p.$Field)"
+                            }
+                        } 
+                    }
+                }
+                default { Throw "$VerbosePrefix Field not handled: $Field" }
             }
 		} else {
 			$ReturnObject += HelperCloneCustomType $p
