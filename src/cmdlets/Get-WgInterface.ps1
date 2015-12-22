@@ -50,12 +50,17 @@ function Get-WgInterface {
 			$NewInterface.SecondaryIps += $IpEntry
 		}
 		
-		
 		$NewInterface.AntiSpoof         = $Interface.'if-item-list'.item.'physical-if'.'anti-spoof'
 		$NewInterface.AntiScan          = $Interface.'if-item-list'.item.'physical-if'.'anti-scan'
 		$NewInterface.BlockNotification = $Interface.'if-item-list'.item.'physical-if'.'block-notification'
 		$NewInterface.DosPrevention     = $Interface.'if-item-list'.item.'physical-if'.'dos-prevention'
 		$NewInterface.IntraInspection   = $Interface.'if-item-list'.item.'physical-if'.'intra-inspection'
+				
+		$NewInterface.DhcpServerType   = $Interface.'if-item-list'.item.'physical-if'.'dhcp-server'.'server-type'
+
+		$NewInterface.ExternalType = $Interface.'if-item-list'.item.'physical-if'.'external-if'.'external-type'
+		$NewInterface.DynamicDns   = $Interface.'if-item-list'.item.'physical-if'.'external-if'.ddns
+		
 		
 		$ReturnObject           += $NewInterface		
 	}
