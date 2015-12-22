@@ -44,6 +44,13 @@ function Get-WgInterface {
 		$NewInterface.MacAddressEnable = $Interface.'if-item-list'.item.'physical-if'.'mac-address-enable'
 		$NewInterface.MacAddress       = $Interface.'if-item-list'.item.'physical-if'.'mac-address'
 		
+#				public List<string> SecondaryIps;
+
+		foreach ($Ip in $Interface.'if-item-list'.item.'physical-if'.'secondary-ip-list'.'secondary-ip') {
+			$IpEntry = $Ip.ip
+			$IpEntry += '/' + (ConvertTo-MaskLength $Ip.netmask)
+			$NewInterface.SecondaryIps += $IpEntry
+		}
 		
 		$ReturnObject           += $NewInterface		
 	}
