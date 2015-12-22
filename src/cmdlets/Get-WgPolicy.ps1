@@ -51,6 +51,12 @@ function Get-WgPolicy {
 		$NewPolicy.SendTcpReset  = $Policy.'send-tcp-reset'
 		$NewPolicy.PolicyRouting = $Policy.'policy-routing'
 			
+		$NewPolicy.GlobalStickySetting = $Policy.'using-global-sticky-setting'
+		$NewPolicy.PolicyStickyTimer   = $Policy.'policy-sticky-timer'
+			
+		$NewPolicy.Global1To1Nat = $Policy.'global-1to1-nat'
+		$NewPolicy.GlobalDnat    = $Policy.'global-dnat'
+		
 		$ReturnObject           += $NewPolicy		
 	}
 	
