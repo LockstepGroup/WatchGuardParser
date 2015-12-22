@@ -47,14 +47,24 @@ function Resolve-WgPolicy {
                             $Lookup = $LookupTable | ? { $_.Name -eq $p.$Field }
                             if ($Lookup) {
                                 foreach ($m in $Lookup.Members) {
-                                    $NewPolicy = HelperCloneCustomType $p
-                                    $NewPolicy.$Field = $m
-                                    $ReturnObject += $NewPolicy
+                                    $NewPolicy         = HelperCloneCustomType $p
+                                    $NewPolicy.$Field  = $m
+                                    $ReturnObject     += $NewPolicy
                                 }
                             } else {
                                 Throw "$VerbosePrefix Field Lookup failed: $Field`: $($p.$Field)"
                             }
                         } 
+                    }
+                }
+                { $_ -match "user" } {
+                    switch ($p.$Field) {
+                        Any { $ReturnObject += HelperCloneCustomType $p }
+                        default {
+                            $NewPolicy         = HelperCloneCustomType $p
+                            $NewPolicy.$Field  = Resolve-WgAuthGroup $p.$Field $LookupTable
+                            $ReturnObject     += $NewPolicy
+                        }
                     }
                 }
                 default { Throw "$VerbosePrefix Field not handled: $Field" }

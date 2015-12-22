@@ -27,7 +27,7 @@ function Get-WgAuthGroup {
         $NewAuthGroup.AuthGroupType = $AuthGroup.'auth-group-item'.item.type
         $NewAuthGroup.MembershipId  = $AuthGroup.'auth-group-item'.item.'membership-id'
         $NewAuthGroup.AuthDomain    = $AuthGroup.'auth-group-item'.item.'auth-domain'
-        $NewAuthGroup.AuthDomain    = $AuthGroup.'auth-group-item'.item.'auth-group-name'
+        $NewAuthGroup.AuthGroupname = $AuthGroup.'auth-group-item'.item.'auth-group-name'
         
 		$ReturnObject += $NewAuthGroup		
 	}
