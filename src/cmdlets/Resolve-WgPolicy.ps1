@@ -26,15 +26,18 @@ function Resolve-WgPolicy {
 			foreach ($m in $Lookup.Members) {
 				$NewProperties = @()
 				$MemberProperties = ($m | gm -type Property).Name
-				foreach ($p in $MemberProperties) {
-					if ($p -match 'name') { continue }
-					$NewProperties += "$NewPrefix`$p"
+				foreach ($prop in $MemberProperties) {
+#					if ($prop -match 'name') { continue }
+					$NewProperties += "$NewPrefix$prop"
+					Write-Verbose "$NewPrefix$prop"
 				}
 				
 				$NewPolicy = HelperCloneCustomType $p $NewProperties
+				$Global:NewPolicy = $NewPolicy
 				
-				foreach ($p in $NewProperties) {
-					$NewPolicy.$p = $m.$p
+				foreach ($prop in $MemberProperties) {
+#					if ($prop -match 'name') { continue }
+					$NewPolicy."$NewPrefix$prop" = $m.$prop
 				}
 				$ReturnObject += $NewPolicy
 			}
