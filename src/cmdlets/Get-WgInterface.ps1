@@ -38,6 +38,13 @@ function Get-WgInterface {
 		
 		$NewInterface.DefaultGateway  = $Interface.'if-item-list'.item.'physical-if'.'default-gateway'
 		
+		$NewInterface.Mtu              = $Interface.'if-item-list'.item.'physical-if'.'mtu'
+		$NewInterface.AutoNegotiation  = $Interface.'if-item-list'.item.'physical-if'.'auto-negotiation'
+		$NewInterface.LinkSpeed        = $Interface.'if-item-list'.item.'physical-if'.'link-speed'
+		$NewInterface.MacAddressEnable = $Interface.'if-item-list'.item.'physical-if'.'mac-address-enable'
+		$NewInterface.MacAddress       = $Interface.'if-item-list'.item.'physical-if'.'mac-address'
+		
+		
 		$ReturnObject           += $NewInterface		
 	}
 	
