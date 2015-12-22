@@ -26,11 +26,12 @@ function Get-WgAlias {
 		$ReturnObject         += $NewAlias
 		
 		foreach ($Member in $Alias.'alias-member-list'.'alias-member') {
-			$NewMember            = New-Object WatchGuardParser.alias-member
+			$NewMember            = New-Object WatchGuardParser.AliasMember
 			$NewMember.Type       = $Member.type
 			$NewMember.User       = $Member.user
 			$NewMember.Address    = $Member.address
 			$NewMember.Interface  = $Member.interface
+			$NewMember.AliasName  = $Member.'alias-name'
 			$NewAlias.Members    += $NewMember
 		}
 	}

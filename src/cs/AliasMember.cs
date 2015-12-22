@@ -14,5 +14,6 @@ namespace WatchGuardParser {
 		public string User;
 		public string Address;
 		public string Interface;
+		public string AliasName;
     }
 }
