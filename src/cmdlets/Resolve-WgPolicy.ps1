@@ -69,11 +69,23 @@ function Resolve-WgPolicy {
                 }
                 Service {
                     $Lookup = $LookupTable | ? { $_.Name -eq $p.$Field }
-                    foreach ($Member in $Lookup.Members) {
-                        $NewPolicy                  = HelperCloneCustomType $p ServiceResolved
-                        $NewPolicy.ServiceResolved  = $Member
-                        $ReturnObject              += $NewPolicy 
+                    if ($Lookup) {
+                        foreach ($Member in $Lookup.Members) {
+                            $NewPolicy                  = HelperCloneCustomType $p ServiceResolved
+                            $NewPolicy.ServiceResolved  = $Member
+                            $ReturnObject              += $NewPolicy 
+                        }
+                    } else {
+                        Throw "$VerbosePrefix Service not found: $($p.$Field)"
                     }
+                }
+                Nat {
+                    $Lookup                        = $LookupTable | ? { $_.Name -eq $p.$Field }
+                    $NewPolicy                     = HelperCloneCustomType $p NatExternalAddress,NatInternalAddress,NatInterface
+                    $NewPolicy.NatExternalAddress  = $Lookup.ExternalAddress
+                    $NewPolicy.NatInternalAddress  = $Lookup.Address
+                    $NewPolicy.NatInterface        = $Lookup.Interface
+                    $ReturnObject                 += $NewPolicy
                 }
                 default { Throw "$VerbosePrefix Field not handled: $Field" }
             }
