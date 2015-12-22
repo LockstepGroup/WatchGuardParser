@@ -66,6 +66,14 @@ function Get-WgInterface {
 		$NewInterface.VpnAgingPMtu = $Interface.'if-item-list'.item.'physical-if'.'vpn-aging-pmtu'
 		$NewInterface.IpsecAction  = $Interface.'if-item-list'.item.'ipsec-action'
 
+		$NewInterface.QosMaxBandwidth = $Interface.'if-item-list'.item.'physical-if'.'qos'.'max-link-bandwidth'
+		$NewInterface.QosField        = $Interface.'if-item-list'.item.'physical-if'.'qos'.'qos-marking'.'marking-field'
+		$NewInterface.QosMethod       = $Interface.'if-item-list'.item.'physical-if'.'qos'.'qos-marking'.'marking-method'.'marking-type'
+		$NewInterface.QosPriority     = $Interface.'if-item-list'.item.'physical-if'.'qos'.'qos-marking'.'priority-method'
+
+		$NewInterface.RestrictTraffic    = $Interface.'if-item-list'.item.'physical-if'.'static-mac-ip-binds'.'restrict-traffic'
+		$NewInterface.StaticMacAclEnable = $Interface.'if-item-list'.item.'physical-if'.'static-mac-acl'.enable
+
 		$ReturnObject           += $NewInterface		
 	}
 	
