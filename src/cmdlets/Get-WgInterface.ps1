@@ -28,6 +28,15 @@ function Get-WgInterface {
 		$NewInterface.InterfaceName     = $Interface.'if-item-list'.item.'physical-if'.'if-dev-name'
 		$NewInterface.InterfaceProperty = $Interface.'if-item-list'.item.'physical-if'.'if-property'
 		$NewInterface.Enabled           = $Interface.'if-item-list'.item.'physical-if'.'enabled'
+			
+		$NewInterface.IpType          = $Interface.'if-item-list'.item.'physical-if'.'ip-node-type'
+		
+		$NewInterface.IpAddress       = $Interface.'if-item-list'.item.'physical-if'.'ip'
+		if ($Interface.'if-item-list'.item.'physical-if'.'netmask') {
+			$NewInterface.IpAddress      += '/' + (ConvertTo-MaskLength $Interface.'if-item-list'.item.'physical-if'.'netmask')
+		}
+		
+		$NewInterface.DefaultGateway  = $Interface.'if-item-list'.item.'physical-if'.'default-gateway'
 		
 		$ReturnObject           += $NewInterface		
 	}
