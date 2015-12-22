@@ -61,7 +61,11 @@ function Get-WgInterface {
 		$NewInterface.ExternalType = $Interface.'if-item-list'.item.'physical-if'.'external-if'.'external-type'
 		$NewInterface.DynamicDns   = $Interface.'if-item-list'.item.'physical-if'.'external-if'.ddns
 		
-		
+		$NewInterface.VpnDfBit     = $Interface.'if-item-list'.item.'physical-if'.'vpn-df-bit'
+		$NewInterface.VpnMinPMtu   = $Interface.'if-item-list'.item.'physical-if'.'vpn-min-pmtu'
+		$NewInterface.VpnAgingPMtu = $Interface.'if-item-list'.item.'physical-if'.'vpn-aging-pmtu'
+		$NewInterface.IpsecAction  = $Interface.'if-item-list'.item.'ipsec-action'
+
 		$ReturnObject           += $NewInterface		
 	}
 	
