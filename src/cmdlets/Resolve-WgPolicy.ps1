@@ -27,8 +27,7 @@ function Resolve-WgPolicy {
                     
                     $AliasFields = @("User"
                                      "Address"
-                                     "Interface"
-                                     "AliasName")
+                                     "Interface")
                     $NewFields = @()
                     foreach ($a in $AliasFields) { $NewFields += "$NewFieldPrefix$a" }
                     

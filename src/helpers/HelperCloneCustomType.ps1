@@ -11,7 +11,7 @@ function HelperCloneCustomType {
 	$VerbosePrefix = "HelperCloneCustomType: "
 	
 	$Type         = $Object.GetType().FullName
-	$Properties   = $Object | gm -Type Property
+	$Properties   = $Object | gm -Type *Property
 	$ValidProperties = @()
 	
 	foreach ($p in $Properties) {
@@ -19,11 +19,12 @@ function HelperCloneCustomType {
 	}
 	
 	if ($AddProperties) {
-		$ValidProperties += $AddProperties
+		$ValidProperties += ( $AddProperties | ? { $ValidProperties -notcontains $_ } )
 	}
 	
+    Write-Verbose "$VerbosePrefix $($ValidProperties -join ',')"
+    
 	$ReturnObject = "" | Select $ValidProperties
-	#$global:ValidProperties = $ValidProperties
 	
 	foreach ($p in $Properties) {
 		$ReturnObject."$($p.Name)" = $Object."$($p.Name)"
