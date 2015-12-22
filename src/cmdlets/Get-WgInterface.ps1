@@ -22,6 +22,12 @@ function Get-WgInterface {
 		$NewInterface.Name             = $Interface.name
 		$NewInterface.Description      = $Interface.description
 		$NewInterface.Property         = $Interface.property
+		$NewInterface.ItemType         = $Interface.'if-item-list'.item.'item-type'
+		
+		$NewInterface.InterfaceNumber   = $Interface.'if-item-list'.item.'physical-if'.'if-num'
+		$NewInterface.InterfaceName     = $Interface.'if-item-list'.item.'physical-if'.'if-dev-name'
+		$NewInterface.InterfaceProperty = $Interface.'if-item-list'.item.'physical-if'.'if-property'
+		$NewInterface.Enabled           = $Interface.'if-item-list'.item.'physical-if'.'enabled'
 		
 		$ReturnObject           += $NewInterface		
 	}

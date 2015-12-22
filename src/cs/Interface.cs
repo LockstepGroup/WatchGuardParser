@@ -16,9 +16,9 @@ namespace WatchGuardParser {
 		public int ItemType;
 		
 		public int InterfaceNumber;
-		public int InterfaceName;
+		public string InterfaceName;
 		public int InterfaceProperty;
-		public bool Enabled;
+		public int Enabled;
 		
 		public string IpType;
 		public string IpAddress;
@@ -46,7 +46,6 @@ namespace WatchGuardParser {
 		public int VpnDfBit;
 		public int VpnMinPMtu;
 		public int VpnAgingPMtu;
-		public int VpnDfBit;
 		public string IpsecAction;
 		
 		public int QosMaxBandwidth;
