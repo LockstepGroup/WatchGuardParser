@@ -7,7 +7,10 @@ function Get-WgIkeAction {
 
 	Param (
 		[Parameter(Mandatory=$True,Position=0)]
-		[array]$ConfigContents
+		[array]$ConfigContents,
+        
+        [Parameter(Mandatory=$False,Position=1)]
+		[string]$Name
 	)
 	
 	$VerbosePrefix = "Get-WgIkeAction: "
@@ -51,7 +54,10 @@ function Get-WgIkeAction {
 		
 	}
 	
-	return $ReturnObject
-	
+	if ($Name) {
+        return ($ReturnObject | ? { $_.Name -eq $Name })
+    } else {
+	   return $ReturnObject
+    }
 }
 
