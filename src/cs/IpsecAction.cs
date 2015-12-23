@@ -26,6 +26,7 @@ namespace WatchGuardParser {
         public List<LocalRemotePair> LocalRemotePairList;
         
         public string IkePolicy;
+        public string IkePolicyGroup;
         public int Pfs;
         public int DhGroup;
         

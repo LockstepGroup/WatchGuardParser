@@ -7,7 +7,10 @@ function Get-WgIpsecAction {
 
 	Param (
 		[Parameter(Mandatory=$True,Position=0)]
-		[array]$ConfigContents
+		[array]$ConfigContents,
+        
+        [Parameter(Mandatory=$False,Position=1)]
+		[string]$Name
 	)
 	
 	$VerbosePrefix = "Get-WgIpsecAction: "
@@ -42,13 +45,10 @@ function Get-WgIpsecAction {
             $NewIpsecAction.LocalRemotePairList += $NewPair
         }
         
-        if ($IpsecAction.'ike-policy') {
-            $NewIpsecAction.IkePolicy = $IpsecAction.'ike-policy'
-        } else {
-            $NewIpsecAction.IkePolicy = $IpsecAction.'ike-policy-group'
-        }
-        $NewIpsecAction.Pfs       = $IpsecAction.'pfs'
-        $NewIpsecAction.DhGroup   = $IpsecAction.'dh-group'
+        $NewIpsecAction.IkePolicy      = $IpsecAction.'ike-policy'
+        $NewIpsecAction.IkePolicyGroup = $IpsecAction.'ike-policy-group'
+        $NewIpsecAction.Pfs            = $IpsecAction.'pfs'
+        $NewIpsecAction.DhGroup        = $IpsecAction.'dh-group'
         
         $NewIpsecAction.IpsecProposal   = $IpsecAction.'ipsec-proposal'.'member'
         
@@ -58,7 +58,10 @@ function Get-WgIpsecAction {
 		
 	}
 	
-	return $ReturnObject
-	
+    if ($Name) {
+        return ($ReturnObject | ? { $_.Name -eq $Name })
+    } else {
+	   return $ReturnObject
+    }
 }
 
